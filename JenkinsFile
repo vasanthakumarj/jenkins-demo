@@ -13,9 +13,24 @@ pipeline {
                 }
 		stage('three') {
                         steps {
-                                echo 'This is stage 3 and final'
+                                echo 'This is stage 3 and pre-final'
                         }
                 }
+		stage('four') {
+			parallel{
+				stage('unittest1') {
+					steps { 
+						echo 'Running the unit test..'
+					}
+				}
+				stage('integrationtest1') {
+                                        steps { 
+                                                echo 'Running the Integration test..'
+                                        }
+                                }
+
+			}
+		}
 	}
 }
 	
